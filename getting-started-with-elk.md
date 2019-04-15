@@ -16,9 +16,7 @@ Author: [Erik Lönroth] and [Xinyue Mao]
 # The ELK stack
  - Basic concept
    ELK Stack comprises of three popular projects: [Elastic Search], [Logstash] and [Kibana], which is an effective tool to help users search, analize and visualize log data in real time.
-   The ELK architectrue:
-   (source: https://howtodoinjava.com/microservices/elk-stack-tutorial-example/)
-   ![alt text][elk]
+   The ELK architectrue is detaily introduced in [ELK Stack Tutorial]. 
    **Elastic Search** is a distributed, JSON-based search and analytics engine designed for horizontal scalability, maximum reliability, and easy management.
    **Logstash** is a dynamic data collection pipeline with an extensible plugin ecosystem and strong Elasticsearch synergy.
    **Kibana** is an open source data visualization plugin for Elasticsearch. It provides visualization capabilities on top of the content indexed on an Elasticsearch cluster.
@@ -119,3 +117,4 @@ test_logger.info("python-logstash: test extra fields", extra=extra)
 [Xinyue Mao]: http://awesome
 [tiny-python]: https://jujucharms.com/new/u/erik-lonroth/tiny-python
 [Getting started]: https://docs.jujucharms.com/2.5/en/getting-started
+[ELK Stack Tutorial]: https://howtodoinjava.com/microservices/elk-stack-tutorial-example/
