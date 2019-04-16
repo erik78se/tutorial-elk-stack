@@ -90,10 +90,10 @@ Now, login to the tiny-python unit which will be used to send logs from.
 
 ```juju ssh tiny-python/0```
 
-Once logged in, install [python-logstash] with apt: 
+Once logged in, install [python-logstash] with pip: 
 
 ```
-sudo apt install python-logstash
+sudo pip3 install python-logstash
 ```
 
 Now, create a python script: my-logstash-script.py
@@ -140,7 +140,7 @@ Good work! You are now ready to send logs to logstash!
 Go ahead and run the script that will send some logs over UDP to logstash.
 
 ```
-python my-logstash-script.py
+python3 my-logstash-script.py
 ```
 
 You should now be able go back to Kibana and add another index and see your logs coming in.
