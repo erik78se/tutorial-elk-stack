@@ -23,20 +23,21 @@ Author: [Erik Lönroth] and [Xinyue Mao]
  Lets use juju to deploy the full stack.
 
  - Deploy it from charm store
-    *Note: The constraints are needed on some clouds since instances can get too small to start logstash unless asked for about 4G ram.*
     ```sh
-    juju deploy cs:~omnivector/bundle/elk --constraints mem=4G cpu=2
+    juju deploy cs:~omnivector/bundle/elk --constraints
     ```
     Watch the deploy status:
     ```sh
     juju status
     ```
-    #TODO: Insert picture of a ready deploy.
+    An example shows machines are ready:
+    ![status] 
     
-    #TODO: Explain why we need to generate noice for our test...
     
  - Generate noise (for testing)
-   When the deploy is ready, lets use the `generate-noise` [juju action] to test if the ELK Stack components work as they should.
+   How can we test if the ELK Stack components work as expected?
+   `generate-noise` is a build-in function generates logs for temporary use.
+   When the deploy is ready, lets use the `generate-noise` [juju action]: 
    ```sh
    juju run-action logstash/0 generate-noise
    ```
@@ -55,16 +56,18 @@ Author: [Erik Lönroth] and [Xinyue Mao]
    juju status
    ```
    Find unit Kibana and copy corresponding IP address, then paste into any browser.
-   In this bundle, we use username:`admin` and password:`mysecret`, and hit Enter!
+   Check [kibana document] to get the login information, then hit Enter!
    Now we login to Kibana!
    
-   We can see **Management** in the bottom of the left bar, choose **Management** -> **Index Patterns** -> **Create Index Pattern**
+   Choose **Management** -> **Index Patterns** -> **Create Index Pattern**
    In search box, if we input `logstash*`, then the noise generated will appear underneath. Then **Next Step**.
    We could choose filter index by **@timestamp**, and **Create Index Pattern**.
-   
+   ![kibanascreenshoot]
+
  - Look at the noice in the web
    We go back to see the left bar, choose **Discover** on the top. Then click the name we created for index pattern several steps ago. In this case, the option should be `logstash*`.
    Adjust the filter parameters according to your requirement, then you would see the visualized log (noise) data come out! 
+
    Yay~~
    
 
@@ -181,3 +184,6 @@ Amazing job! You are now an ELK wizard.
 [Logstash]: https://jujucharms.com/u/omnivector/logstash
 [Kibana]: https://jujucharms.com/u/omnivector/kibana
 [juju action]: https://docs.jujucharms.com/2.5/en/actions
+[status]: https://github.com/erik78se/tutorial-elk-stack/blob/master/jujustatus.PNG?raw=true
+[kibana document]: https://jujucharms.com/u/omnivector/kibana/
+[kibanascreenshoot]: https://github.com/erik78se/tutorial-elk-stack/blob/master/kibana_screenshoot.PNG?raw=true
