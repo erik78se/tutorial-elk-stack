@@ -186,7 +186,7 @@ To see the logs coming in from filebeat (your logfile), add another index (fileb
 Amazing job! You are now an ELK wizard.
 
 # Contributors
-@xinue mao
+
 
 
 [Erik Lönroth]: http://eriklonroth.wordpress.com
