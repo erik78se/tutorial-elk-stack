@@ -69,29 +69,28 @@ Author: [Erik Lönroth] and [Xinyue Mao]
    
 
 
-# Send remote data via TCP/UDP
-At this point, its possible to send logs to logstash with you applications. To demo this, we will deploy an educational charm called 'tiny-python' and using that unit, create a python script that sends logs to logstash that in turn throws it into elastic search.
+# Send logs with python-logstash
+Its now possible to send logs to logstash with you applications. To demo this, we will deploy a charm called [tiny-python]. From that tiny-python unit, we will send some logs to the ELK stack.
 
-Lets start by deploying tiny-python which will create a new unit in our model.
-
-## Deploy tiny-python
+Start by deploying tiny-python.
 
 ``` juju deploy cs:~erik-lonroth/tiny-python ```
 
-Once its deployed, install the python-logstash package to it.
-## Install python-logstash
-```juju run tiny-python/0 'sudo apt install python-logstash```
-
-## Send a log message to logstash
-Now lets login to the tiny-python unit which will be used to send logs from.
+Now, login to the tiny-python unit which will be used to send logs from.
 
 ```juju ssh tiny-python/0```
 
-Once logged in, lets create a python application that makes use of the logstash python library.
+Once logged in, install [python-logstash] with apt: 
 
-Lets call the python script: my-logstash-script.py
+```
+sudo apt install python-logstash
+```
 
-At this point, you need to figure out the IP address of the logstash unit.
+Now, create a python script: my-logstash-script.py
+
+For success, you need to figure out the IP address of the logstash unit. We leave that up to you to figure out before we move on.
+
+The script should look like this:
 
 ```python
 import logging
@@ -105,8 +104,8 @@ test_logger = logging.getLogger('python-logstash-logger')
 test_logger.setLevel(logging.INFO)
 
 # Port for UDP is: 5000, TCP: 6000
-test_logger.addHandler(logstash.TCPLogstashHandler(host, 6000, version=1))
-# test_logger.addHandler(logstash.LogstashHandler(host, 5000, version=1))
+test_logger.addHandler(logstash.LogstashHandler(host, 5000, version=1))
+# test_logger.addHandler(logstash.TCPLogstashHandler(host, 6000, version=1))
 
 test_logger.error('python-logstash: test logstash error message.')
 test_logger.info('python-logstash: test logstash info message.')
@@ -125,9 +124,10 @@ extra = {
 test_logger.info("python-logstash: test extra fields", extra=extra)
 ```
 
-You are now ready to send logs to logstash!
+Good work! You are now ready to send logs to logstash!
 
 ## Execute the test
+Go ahead and run the script that will send some logs over UDP to logstash.
 
 ```
 python my-logstash-script.py
@@ -137,14 +137,20 @@ You should now be able go back to Kibana and add another index and see your logs
 
 #TODO: Screenshots
 
-Great work, you should now have the basics for sending logs to logstash.
+Great work, you should now have the basics for sending logs to logstash. 
 
-But, what if you have a file with logs and want to monitor that for log entries?
+Before you move on, why dont you modify the script to use TCP as the carrier protocol?
 
-This is where we can use juju again to add in [filebeat] to the equation. This is easy with juju.
+## Logging using files
 
-## Adding in filebeat
-Deploy filebeat (subordinate charm) and attach it to the exising tiny-python charm. The filebeat charm is in turn related to logstash. Like this:
+What if you have a file with logs and want to monitor that for log entries? After all, this is very common.
+
+This is where we can use juju again to add in [filebeat] to the equation. Filebeat is made to monitor files.
+
+Making use of filebeat is easy with juju.
+
+## Add filebeat
+Deploy [filebeat] and relate it to the exising [tiny-python] charm, then [filebeat] charm is related to logstash. Like this:
 ```
 juju deploy filebeat
 juju relate filebeat tiny-python
@@ -152,24 +158,26 @@ juju relate filebeat logstash
 ```
 
 ## Decide on files to monitor
-The filebeat charm can be configured to monitor any files. Lets decide to monitor the file: '/home/ubuntu/mylogfile.log'
+The [filebeat] charm can be configured to monitor any file. Lets change the default config and monitor the file: '/home/ubuntu/mylogfile.log'
 
 ```
-juju config filebeat logfile="/home/ubuntu/mylogfile.log"
+juju config filebeat logpath="/home/ubuntu/mylogfile.log"
 ```
-Now, lets echo some values to the file:
+
+Now, lets write some log messages to the file:
 
 ```
-echo "HELLO WORLD" >> /home/ubuntu/mylogfile.log
+echo "HELLO WORLD OF LOGS" >> /home/ubuntu/mylogfile.log
 ```
 
 ## Add the new index to kibana
-To see the logs coming in from filebeat (your logfile), add another index in kibana and you are all set.
+To see the logs coming in from filebeat (your logfile), add another index (filebeat-) in kibana and you are all set.
 
 Amazing job! You are now an ELK wizard.
 
 # Contributors
- - anyone that contributes should be attributed
+@xinue mao
+
 
 [Erik Lönroth]: http://eriklonroth.wordpress.com
 [Xinyue Mao]: http://awesome
@@ -181,3 +189,5 @@ Amazing job! You are now an ELK wizard.
 [Logstash]: https://jujucharms.com/u/omnivector/logstash
 [Kibana]: https://jujucharms.com/u/omnivector/kibana
 [juju action]: https://docs.jujucharms.com/2.5/en/actions
+[filebeat]: https://jujucharms.com/filebeat
+[python-logstash]: https://pypi.org/project/python-logstash/
