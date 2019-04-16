@@ -70,22 +70,43 @@ Author: [Erik Lönroth] and [Xinyue Mao]
 
 
 # Send remote data via TCP/UDP
- - deploy tiny-python
- - install python-logstash
- - write a test application
+At this point, its possible to send logs to logstash with you applications. To demo this, we will deploy an educational charm called 'tiny-python' and using that unit, create a python script that sends logs to logstash that in turn throws it into elastic search.
 
+Lets start by deploying tiny-python which will create a new unit in our model.
+
+## Deploy tiny-python
+
+``` juju deploy cs:~erik-lonroth/tiny-python ```
+
+Once its deployed, install the python-logstash package to it.
+## Install python-logstash
+```juju run tiny-python/0 'sudo apt install python-logstash```
+
+## Send a log message to logstash
+Now lets login to the tiny-python unit which will be used to send logs from.
+
+```juju ssh tiny-python/0```
+
+Once logged in, lets create a python application that makes use of the logstash python library.
+
+Lets call the python script: my-logstash-script.py
+
+At this point, you need to figure out the IP address of the logstash unit.
 
 ```python
 import logging
 import logstash
 import sys
 
-host = '127.0.0.1'
+# IP address of the logstash unit need to go here.
+host = '<ip-of-the-logstash-unit>'
 
 test_logger = logging.getLogger('python-logstash-logger')
 test_logger.setLevel(logging.INFO)
-# test_logger.addHandler(logstash.LogstashHandler(host, 5000, version=1))
+
+# Port for UDP is: 5000, TCP: 6000
 test_logger.addHandler(logstash.TCPLogstashHandler(host, 6000, version=1))
+# test_logger.addHandler(logstash.LogstashHandler(host, 5000, version=1))
 
 test_logger.error('python-logstash: test logstash error message.')
 test_logger.info('python-logstash: test logstash info message.')
@@ -104,12 +125,48 @@ extra = {
 test_logger.info("python-logstash: test extra fields", extra=extra)
 ```
 
- - send logs to some index
+You are now ready to send logs to logstash!
 
-# Adding in filebeat
- - deploy and relating to logstash
- - configure a file to monitor
- - echo to the file and watch logs
+## Execute the test
+
+```
+python my-logstash-script.py
+```
+
+You should now be able go back to Kibana and add another index and see your logs coming in.
+
+#TODO: Screenshots
+
+Great work, you should now have the basics for sending logs to logstash.
+
+But, what if you have a file with logs and want to monitor that for log entries?
+
+This is where we can use juju again to add in [filebeat] to the equation. This is easy with juju.
+
+## Adding in filebeat
+Deploy filebeat (subordinate charm) and attach it to the exising tiny-python charm. The filebeat charm is in turn related to logstash. Like this:
+```
+juju deploy filebeat
+juju relate filebeat tiny-python
+juju relate filebeat logstash
+```
+
+## Decide on files to monitor
+The filebeat charm can be configured to monitor any files. Lets decide to monitor the file: '/home/ubuntu/mylogfile.log'
+
+```
+juju config filebeat logfile="/home/ubuntu/mylogfile.log"
+```
+Now, lets echo some values to the file:
+
+```
+echo "HELLO WORLD" >> /home/ubuntu/mylogfile.log
+```
+
+## Add the new index to kibana
+To see the logs coming in from filebeat (your logfile), add another index in kibana and you are all set.
+
+Amazing job! You are now an ELK wizard.
 
 # Contributors
  - anyone that contributes should be attributed
