@@ -145,7 +145,8 @@ python3 my-logstash-script.py
 
 You should now be able go back to Kibana and add another index and see your logs coming in.
 
-#TODO: Screenshots
+Here is an example of visualized log data in Kibana with index "logstash-":
+![kibana logstash]
 
 Great work, you should now have the basics for sending logs to logstash. 
 
@@ -204,3 +205,4 @@ Amazing job! You are now an ELK wizard.
 [status]: https://github.com/erik78se/tutorial-elk-stack/blob/master/jujustatus.PNG?raw=true
 [kibana document]: https://jujucharms.com/u/omnivector/kibana/
 [kibanascreenshoot]: https://github.com/erik78se/tutorial-elk-stack/blob/master/kibana_screenshoot.PNG?raw=true
+[kibana logstash]: https://github.com/erik78se/tutorial-elk-stack/blob/master/kibana_logstash_pythonlogger.PNG?raw=true
