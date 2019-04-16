@@ -25,7 +25,7 @@ Author: [Erik Lönroth] and [Xinyue Mao]
 
  - Deploy it from charm store
     ```sh
-    juju deploy cs:~omnivector/bundle/elk --constraints
+    juju deploy cs:~omnivector/bundle/elk
     ```
     Watch the deploy status:
     ```sh
@@ -67,7 +67,7 @@ Author: [Erik Lönroth] and [Xinyue Mao]
    We could choose filter index by **@timestamp**, and **Create Index Pattern**.
    ![kibanascreenshoot]
 
- - Look at the noice in the web
+ - Look at the noise in the web
  
    We go back to see the left bar, choose **Discover** on the top. Then click the name we created for index pattern several steps ago. In this case, the option should be `logstash*`.
    Adjust the filter parameters according to your requirement, then you would see the visualized log (noise) data come out! 
