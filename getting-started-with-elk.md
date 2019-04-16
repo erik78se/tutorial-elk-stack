@@ -1,6 +1,7 @@
 # Tutorial: Getting started with ELK
 
 Difficulty: Intermediate
+
 Author: [Erik Lönroth] and [Xinyue Mao]
 
 # What you will learn 
@@ -148,7 +149,7 @@ Great work, you should now have the basics for sending logs to logstash.
 
 But, what if you have a file with logs and want to monitor that for log entries?
 
-This is where we can use juju again to add in [filebeat] to the equation. This is easy with juju.
+This is where we can use juju again to add in [filebeat charm] to the equation. This is easy with juju.
 
 ## Adding in filebeat
 Deploy filebeat (subordinate charm) and attach it to the exising tiny-python charm. The filebeat charm is in turn related to logstash. Like this:
@@ -191,3 +192,4 @@ Amazing job! You are now an ELK wizard.
 [status]: https://github.com/erik78se/tutorial-elk-stack/blob/master/jujustatus.PNG?raw=true
 [kibana document]: https://jujucharms.com/u/omnivector/kibana/
 [kibanascreenshoot]: https://github.com/erik78se/tutorial-elk-stack/blob/master/kibana_screenshoot.PNG?raw=true
+[filebeat charm]: https://jujucharms.com/filebeat/
