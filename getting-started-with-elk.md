@@ -183,7 +183,8 @@ echo "HELLO WORLD OF LOGS" >> /home/ubuntu/mylogfile.log
 
 ## Add the new index to kibana
 To see the logs coming in from filebeat (your logfile), add another index (filebeat-) in kibana and you are all set.
-
+Here is an example demonstrating "HELLO" in log file which filebeat monitered.
+![kibana filebeat]
 Amazing job! You are now an ELK wizard.
 
 # Contributors
@@ -206,3 +207,4 @@ Amazing job! You are now an ELK wizard.
 [kibana document]: https://jujucharms.com/u/omnivector/kibana/
 [kibanascreenshoot]: https://github.com/erik78se/tutorial-elk-stack/blob/master/kibana_screenshoot.PNG?raw=true
 [kibana logstash]: https://github.com/erik78se/tutorial-elk-stack/blob/master/kibana_logstash_pythonlogger.PNG?raw=true
+[kibana filebeat]: https://github.com/erik78se/tutorial-elk-stack/blob/master/kibana_filebeat_hello.PNG?raw=true
