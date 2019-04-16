@@ -5,41 +5,42 @@ Author: [Erik Lönroth] and [Xinyue Mao]
 
 # What you will learn 
 
-* Learn how to deploy the ELK stack
-* How to seld logs to it via a pyhton application
-* How to add in "filebeat" to monitor a remote file log
+* How to deploy the ELK stack
+* How to send logs through a custom pyhton application.
+* Use a [juju action] to perform workload in a charm.
+* How to add the [filebeat charm] to track logs in a custom logfile.
 
 # Preparations
-* Linux client
-* JUJU installed
+* You should have a working juju client setup. (Like in this example: [Installing juju])
+* You should be fairly confident deploying charms with juju.
+* Basic understanding of python is good.
 
 # The ELK stack
- - Basic concept
-   ELK Stack comprises of three popular projects: [Elastic Search], [Logstash] and [Kibana], which is an effective tool to help users search, analize and visualize log data in real time.
-   The ELK architectrue is detaily introduced in [ELK Stack Tutorial]. 
-   **Elastic Search** is a distributed, JSON-based search and analytics engine designed for horizontal scalability, maximum reliability, and easy management.
-   **Logstash** is a dynamic data collection pipeline with an extensible plugin ecosystem and strong Elasticsearch synergy.
-   **Kibana** is an open source data visualization plugin for Elasticsearch. It provides visualization capabilities on top of the content indexed on an Elasticsearch cluster.
+ - Basic Concept
+   The ELK Stack comprises three projects: [Elastic Search], [Logstash] and [Kibana], which allows for search, analyse and visualize log data in real time.
+   Here is a picture of the [ELK architecture]. 
+   
+ Lets use juju to deploy the full stack.
 
  - Deploy it from charm store
-       
+    *Note: The constraints are needed on some clouds since instances can get too small to start logstash unless asked for about 4G ram.*
     ```sh
-    juju deploy ~elasticsearch-charmers/bundle/elk-stack
+    juju deploy cs:~omnivector/bundle/elk --constraints mem=4G cpu=2
     ```
-    To test this deployment, we use:
+    Watch the deploy status:
     ```sh
     juju status
     ```
-    Or we could also track juju status by using:
-    ```sh
-    watch juju status --color
-    ```
- - Generate some noise
-   When the status message of unit says they are ready, we can use the provided `generate-noise` action to test whether ELK Stack conponents work well:
+    #TODO: Insert picture of a ready deploy.
+    
+    #TODO: Explain why we need to generate noice for our test...
+    
+ - Generate noise (for testing)
+   When the deploy is ready, lets use the `generate-noise` [juju action] to test if the ELK Stack components work as they should.
    ```sh
    juju run-action logstash/0 generate-noise
    ```
-   When the action is completed, we could also retrieve the resuls by using:
+   Retrieve the results from the action by:
    ```sh
    watch juju show-action-status
    ```
@@ -117,4 +118,9 @@ test_logger.info("python-logstash: test extra fields", extra=extra)
 [Xinyue Mao]: http://awesome
 [tiny-python]: https://jujucharms.com/new/u/erik-lonroth/tiny-python
 [Getting started]: https://docs.jujucharms.com/2.5/en/getting-started
-[ELK Stack Tutorial]: https://howtodoinjava.com/microservices/elk-stack-tutorial-example/
+[ELK architecture]: https://cdn2.howtodoinjava.com/wp-content/uploads/2017/08/ELK.jpg
+[Installing juju]: https://discourse.jujucharms.com/t/installing-juju/1164
+[Elastic Search]: https://jujucharms.com/u/omnivector/elasticsearch
+[Logstash]: https://jujucharms.com/u/omnivector/logstash
+[Kibana]: https://jujucharms.com/u/omnivector/kibana
+[juju action]: södofjsdf
