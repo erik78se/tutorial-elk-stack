@@ -123,4 +123,4 @@ test_logger.info("python-logstash: test extra fields", extra=extra)
 [Elastic Search]: https://jujucharms.com/u/omnivector/elasticsearch
 [Logstash]: https://jujucharms.com/u/omnivector/logstash
 [Kibana]: https://jujucharms.com/u/omnivector/kibana
-[juju action]: södofjsdf
+[juju action]: https://docs.jujucharms.com/2.5/en/actions
