@@ -9,7 +9,7 @@ Author: [Erik Lönroth] and [Xinyue Mao]
 * How to deploy the ELK stack
 * How to send logs through a custom pyhton application.
 * Use a [juju action] to perform workload in a charm.
-* How to add the [filebeat charm] to track logs in a custom logfile.
+* How to add the [filebeat] charm to track logs in a custom logfile.
 
 # Preparations
 * You should have a working juju client setup. (Like in this example: [Installing juju])
@@ -199,12 +199,8 @@ Amazing job! You are now an ELK wizard.
 [Logstash]: https://jujucharms.com/u/omnivector/logstash
 [Kibana]: https://jujucharms.com/u/omnivector/kibana
 [juju action]: https://docs.jujucharms.com/2.5/en/actions
-<<<<<<< HEAD
 [filebeat]: https://jujucharms.com/filebeat
 [python-logstash]: https://pypi.org/project/python-logstash/
-=======
 [status]: https://github.com/erik78se/tutorial-elk-stack/blob/master/jujustatus.PNG?raw=true
 [kibana document]: https://jujucharms.com/u/omnivector/kibana/
 [kibanascreenshoot]: https://github.com/erik78se/tutorial-elk-stack/blob/master/kibana_screenshoot.PNG?raw=true
-[filebeat charm]: https://jujucharms.com/filebeat/
->>>>>>> 6c4c697ad509bbd0ecce4a252d05be1700cfde26
