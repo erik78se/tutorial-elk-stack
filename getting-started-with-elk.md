@@ -39,7 +39,9 @@ Author: [Erik Lönroth] and [Xinyue Mao]
  - Generate noise (for testing)
  
    How can we test if the ELK Stack components work as expected?
+   
    `generate-noise` is a build-in function generates logs for temporary use.
+   
    When the deploy is ready, lets use the `generate-noise` [juju action]: 
    ```sh
    juju run-action logstash/0 generate-noise
