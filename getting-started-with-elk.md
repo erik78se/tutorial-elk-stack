@@ -17,6 +17,7 @@ Author: [Erik Lönroth] and [Xinyue Mao]
 
 # The ELK stack
  - Basic Concept
+ 
    The ELK Stack comprises three projects: [Elastic Search], [Logstash] and [Kibana], which allows for search, analyse and visualize log data in real time.
    Here is a picture of the [ELK architecture]. 
    
@@ -35,6 +36,7 @@ Author: [Erik Lönroth] and [Xinyue Mao]
     
     
  - Generate noise (for testing)
+ 
    How can we test if the ELK Stack components work as expected?
    `generate-noise` is a build-in function generates logs for temporary use.
    When the deploy is ready, lets use the `generate-noise` [juju action]: 
@@ -51,6 +53,7 @@ Author: [Erik Lönroth] and [Xinyue Mao]
    ```
    
  - Login kibana, setup first index
+ 
    We check JUJU structure status by using this command again:
    ```sh
    juju status
@@ -65,6 +68,7 @@ Author: [Erik Lönroth] and [Xinyue Mao]
    ![kibanascreenshoot]
 
  - Look at the noice in the web
+ 
    We go back to see the left bar, choose **Discover** on the top. Then click the name we created for index pattern several steps ago. In this case, the option should be `logstash*`.
    Adjust the filter parameters according to your requirement, then you would see the visualized log (noise) data come out! 
 
