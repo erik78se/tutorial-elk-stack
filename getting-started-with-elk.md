@@ -193,7 +193,7 @@ Amazing job! You are now an ELK wizard.
 
 
 [Erik Lönroth]: http://eriklonroth.wordpress.com
-[Xinyue Mao]: http://https://github.com/xinyuemao
+[Xinyue Mao]: http://github.com/xinyuemao
 [tiny-python]: https://jujucharms.com/new/u/erik-lonroth/tiny-python
 [Getting started]: https://docs.jujucharms.com/2.5/en/getting-started
 [ELK architecture]: https://cdn2.howtodoinjava.com/wp-content/uploads/2017/08/ELK.jpg
