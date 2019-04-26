@@ -22,7 +22,7 @@ Author: [Erik Lönroth] and [Xinyue Mao]
    The ELK Stack comprises three projects: [Elastic Search], [Logstash] and [Kibana], which allows for search, analyse and visualize log data in real time.
    Here is a picture of the [ELK architecture]. 
    
- Lets use juju to deploy the full stack.
+   Lets use juju to deploy the full stack.
 
  - Deploy it from charm store
     ```sh
