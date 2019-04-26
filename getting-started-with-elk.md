@@ -6,7 +6,7 @@ Author: [Erik Lönroth] and [Xinyue Mao]
 
 # What you will learn 
 
-* How to deploy the ELK stack
+* How to deploy the ELK stack.
 * How to send logs through a custom pyhton application.
 * Use a [juju action] to perform workload in a charm.
 * How to add the [filebeat] charm to track logs in a custom logfile.
