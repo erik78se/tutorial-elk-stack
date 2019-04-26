@@ -14,7 +14,7 @@ Author: [Erik Lönroth] and [Xinyue Mao]
 # Preparations
 * You should have a working juju client setup. (Like in this example: [Installing juju])
 * You should be fairly confident deploying charms with juju.
-* Basic understanding of python is good.
+* Basic understanding of Python is good.
 
 # The ELK stack
  - Basic Concept
@@ -57,7 +57,7 @@ Author: [Erik Lönroth] and [Xinyue Mao]
    
  - Login kibana, setup first index
  
-   We check JUJU structure status by using this command again:
+   We check juju structure status by using this command again:
    ```sh
    juju status
    ```
